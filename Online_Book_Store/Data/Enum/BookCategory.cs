@@ -5,7 +5,8 @@
         Horror =1,      
         Education,
         Music,
-
+        Fantasy,
+        Drama
 
 
     }

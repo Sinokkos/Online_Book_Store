@@ -11,7 +11,7 @@ namespace Online_Book_Store.Models
 
         public double Price { get; set; }
 
-        public DateTime PublicationDate { get; set; }
+        public int PublicationDate { get; set; }
         
         public BookCategory Category { get; set; }
 
@@ -24,8 +24,6 @@ namespace Online_Book_Store.Models
         // Publisher
         public Publisher Publisher { get; set; }
         public int PublisherId { get; set; }
-        
-
-
+        public object BookCategory { get; internal set; }
     }
 }
