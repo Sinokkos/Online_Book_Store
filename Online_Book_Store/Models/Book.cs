@@ -24,6 +24,6 @@ namespace Online_Book_Store.Models
         // Publisher
         public Publisher Publisher { get; set; }
         public int PublisherId { get; set; }
-        public object BookCategory { get; internal set; }
+        
     }
 }

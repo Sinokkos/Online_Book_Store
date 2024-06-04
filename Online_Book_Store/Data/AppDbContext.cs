@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Online_Book_Store.Data.Enum;
 using Online_Book_Store.Models;
 
 namespace Online_Book_Store.Data
@@ -15,5 +16,7 @@ namespace Online_Book_Store.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
+
+      
     }
 }
