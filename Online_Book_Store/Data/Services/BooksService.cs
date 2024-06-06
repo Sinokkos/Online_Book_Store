@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Online_Book_Store.Data.Interfaces;
 using Online_Book_Store.Models;
+using Online_Book_Store.ViewModel;
 
 namespace Online_Book_Store.Data.Services
 {
@@ -8,13 +9,14 @@ namespace Online_Book_Store.Data.Services
     {
         private readonly AppDbContext _context;
 
-        public BooksService(AppDbContext context) 
-        {  _context = context; 
+        public BooksService(AppDbContext context)
+        {
+            _context = context;
         }
 
-        public async Task<IEnumerable<Book>> GetAllAsync() 
-        { 
-           var result = await _context.Books.ToListAsync();
+        public async Task<IEnumerable<Book>> GetAllAsync()
+        {
+            var result = await _context.Books.ToListAsync();
             return result;
         }
 
@@ -44,4 +46,20 @@ namespace Online_Book_Store.Data.Services
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task<NewBookDropdownsVM> GetNewBookDropdownsValues()
+        {
+            // Create ekranında bulunacak dropdownlar için listeler oluşturacak...
+
+            var response = new NewBookDropdownsVM()
+            {
+                Authors = await _context.Authors.OrderBy(n => n.Name).ToListAsync(),
+                Publisher = await _context.Publishers.OrderBy(n => n.Name).ToListAsync(),
+
+            };
+
+            return response;
+        }
+
+    }
 }

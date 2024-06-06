@@ -1,21 +1,41 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Online_Book_Store.Data;
+using Online_Book_Store.Data.Interfaces;
+using Online_Book_Store.Models;
 
 namespace Online_Book_Store.Controllers
 {
     public class PublishersController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IPublishersService _service;
 
-        public PublishersController(AppDbContext context)
+        public PublishersController(IPublishersService service)
         {
-            _context = context;
+            _service = service;
 
         }
         public async Task<IActionResult> Index()
         {
-            var PublishersData= _context.Publishers.ToList();
+            var PublishersData= _service.GetAllAsync();
             return View(PublishersData);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Id, Name,Author, ImageURL")] Publisher publisher)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(publisher);
+            }
+
+            await _service.AddAsync(publisher);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
